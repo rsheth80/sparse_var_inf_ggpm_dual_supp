@@ -1,0 +1,35 @@
+This Matlab code contains the functions to implement the dual decomposition 
+method of Khan et al (2013). It is packaged as a supplement to the code in 
+'sparse_var_inf_ggpm'. See 'sparse_var_inf_ggpm/README' for more information.
+
+Rishit Sheth, 2/17/16
+
+Note, this Matlab code provides two edited versions of functions included in the
+minFunc package: minFunc_rs.m and minFunc_processInputOptions_rs.m. The edited 
+functions allow for supplying the minFunc optimization procedure with a step 
+size bounding function (only used in the dual decomposition method). The 
+bounding function can be added as a field to the minFunc options structure:
+
+    opts.stepfunc = @dual_max_step_func
+
+Note, the directories in this package should be added to the Matlab path after 
+the directories for the 'sparse_var_inf_ggpm' package have been added.
+
+*** Overview ***
+
+The included objective functions and corresponding optimization variables are:
+
+    f_obj_dual_l        dual parameter under GGPM
+
+The triplet of Matlab structures (model,data,params) is used throughout the 
+code. For the dual method, the params structure is augmented with:
+
+params:
+    dual:           [structure]
+        lambda:     [Ntrain x 1]            dual parameter (see Khan 2013)
+
+*** References ***
+
+Khan, M. E., Aravkin, A. Y., Friedlander, M. P., and Seeger, M. (2013). Fast 
+dual variational inference for Non-Conjugate LGMs. In Proceedings of The 30th 
+International Conference on Machine Learning, pages 951-959.
